@@ -72,8 +72,6 @@ public class MonitoringScreen extends AppCompatActivity {
                 mTxtReceive.setText("");
             }
         });
-
-
     }
 
     private class ReadInput implements Runnable {
@@ -138,11 +136,7 @@ public class MonitoringScreen extends AppCompatActivity {
                     }
                     Thread.sleep(500);
                 }
-            } catch (IOException e) {
-// TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-// TODO Auto-generated catch block
+            } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
 

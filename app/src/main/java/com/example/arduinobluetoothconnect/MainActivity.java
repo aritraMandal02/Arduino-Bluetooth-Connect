@@ -2,6 +2,7 @@ package com.example.arduinobluetoothconnect;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -183,12 +184,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * Searches for paired devices. Doesn't do a scan! Only devices which are paired through Settings->Bluetooth
-     * will show up with this. I didn't see any need to re-build the wheel over here
-     * @author ryder
-     *
-     */
     private class SearchDevices extends AsyncTask<Void, Void, List<BluetoothDevice>> {
 
         @Override
@@ -199,7 +194,6 @@ public class MainActivity extends AppCompatActivity {
                 listDevices.add(device);
             }
             return listDevices;
-
         }
 
         @Override
@@ -212,16 +206,8 @@ public class MainActivity extends AppCompatActivity {
                 msg("No paired devices found, please pair your serial BT device and try again");
             }
         }
-
     }
 
-    /**
-     * Custom adapter to show the current devices in the list. This is a bit of an overkill for this
-     * project, but I figured it would be good learning
-     * Most of the code is lifted from somewhere but I can't find the link anymore
-     * @author ryder
-     *
-     */
     private class MyAdapter extends ArrayAdapter<BluetoothDevice> {
         private int selectedIndex;
         private Context context;
@@ -272,6 +258,7 @@ public class MainActivity extends AppCompatActivity {
             return myList;
         }
 
+        @SuppressLint("SetTextI18n")
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View vi = convertView;
@@ -302,8 +289,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-// Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.homescreen, menu);
         return true;
     }
 
