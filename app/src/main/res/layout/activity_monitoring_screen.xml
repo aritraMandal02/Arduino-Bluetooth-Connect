@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Send"
+                android:hint="Input"
                 android:inputType="textPersonName"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +63,7 @@
                 android:id="@+id/button"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:text="Button"
+                android:text="Send"
                 app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName"
                 app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName"
                 app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName" />

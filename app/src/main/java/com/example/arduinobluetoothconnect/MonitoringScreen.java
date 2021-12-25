@@ -14,12 +14,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Arrays;
 import java.util.UUID;
 
 public class MonitoringScreen extends AppCompatActivity {
@@ -39,6 +42,8 @@ public class MonitoringScreen extends AppCompatActivity {
     private ScrollView scrollView;
     private CheckBox chkScroll;
     private CheckBox chkReceiveText;
+    private EditText et;
+    private Button sendButton;
 
 
     private boolean mIsBluetoothConnected = false;
@@ -63,8 +68,19 @@ public class MonitoringScreen extends AppCompatActivity {
         chkReceiveText = (CheckBox) findViewById(R.id.chkReceiveText);
         scrollView = (ScrollView) findViewById(R.id.viewScroll);
         mBtnClearInput = (Button) findViewById(R.id.btnClearInput);
+        sendButton = findViewById(R.id.button);
+        et = findViewById(R.id.editTextTextPersonName);
+
         mTxtReceive.setMovementMethod(new ScrollingMovementMethod());
 
+        sendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String msg = et.getText().toString();
+                SendInput sendInput = new SendInput();
+                sendInput.send(msg);
+            }
+        });
         mBtnClearInput.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -74,6 +90,29 @@ public class MonitoringScreen extends AppCompatActivity {
         });
     }
 
+    private class SendInput {
+        InputStream inputStream;
+        OutputStream outputStream;
+        /* Call this from the main activity to send data to the remote device */
+        public void send(String message) {
+            if(outputStream==null){
+                try {
+                    outputStream = mBTSocket.getOutputStream();
+                } catch (IOException e) {
+                    Log.d("Fatal Error", "In onResume(), input and output stream creation failed:" + e.getMessage() + ".");
+                }
+            }
+            Log.d(TAG, "...Data to send: " + message + "...");
+
+            byte[] msgBuffer = (message+ " ").getBytes();
+            try {
+                outputStream.write(msgBuffer);
+                Log.e(TAG, "Int" + Arrays.toString(msgBuffer));
+            } catch (IOException e) {
+                Log.d(TAG, "...Error data send: " + e.getMessage() + "...");
+            }
+        }
+    }
     private class ReadInput implements Runnable {
 
         private boolean bStop = false;
@@ -159,16 +198,13 @@ public class MonitoringScreen extends AppCompatActivity {
 
             if (mReadThread != null) {
                 mReadThread.stop();
-                while (mReadThread.isRunning())
-                    ; // Wait until it stops
+                while (mReadThread.isRunning()); // Wait until it stops
                 mReadThread = null;
-
             }
 
             try {
                 mBTSocket.close();
             } catch (IOException e) {
-// TODO Auto-generated catch block
                 e.printStackTrace();
             }
 
@@ -216,7 +252,6 @@ public class MonitoringScreen extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-// TODO Auto-generated method stub
         super.onSaveInstanceState(outState);
     }
 
@@ -238,7 +273,6 @@ public class MonitoringScreen extends AppCompatActivity {
                     mBTSocket.connect();
                 }
             } catch (IOException e) {
-// Unable to connect to device
                 e.printStackTrace();
                 mConnectSuccessful = false;
             }
@@ -257,7 +291,6 @@ public class MonitoringScreen extends AppCompatActivity {
                 mIsBluetoothConnected = true;
                 mReadThread = new ReadInput(); // Kick off input reader
             }
-
             progressDialog.dismiss();
         }
 

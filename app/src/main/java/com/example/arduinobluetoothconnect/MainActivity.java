@@ -113,13 +113,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void onPause() {
-// TODO Auto-generated method stub
         super.onPause();
     }
 
     @Override
     protected void onStop() {
-// TODO Auto-generated method stub
         super.onStop();
     }
 
