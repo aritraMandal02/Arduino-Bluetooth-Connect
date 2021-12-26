@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Aritra Mandal/StudioProjects/ArduinoBluetoothConnect/app/src/main/res/drawable-v24/border.xml" value="0.2484375" />
+        <entry key="..\:/Users/Aritra Mandal/StudioProjects/ArduinoBluetoothConnect/app/src/main/res/drawable/background.xml" value="0.2484375" />
+        <entry key="..\:/Users/Aritra Mandal/StudioProjects/ArduinoBluetoothConnect/app/src/main/res/drawable/background2.xml" value="0.2484375" />
+        <entry key="..\:/Users/Aritra Mandal/StudioProjects/ArduinoBluetoothConnect/app/src/main/res/drawable/background3.xml" value="0.2484375" />
+        <entry key="..\:/Users/Aritra Mandal/StudioProjects/ArduinoBluetoothConnect/app/src/main/res/drawable/button_background.xml" value="0.2484375" />
         <entry key="..\:/Users/Aritra Mandal/StudioProjects/ArduinoBluetoothConnect/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/Aritra Mandal/StudioProjects/ArduinoBluetoothConnect/app/src/main/res/layout/activity_monitoring_screen.xml" value="0.176" />
         <entry key="..\:/Users/Aritra Mandal/StudioProjects/ArduinoBluetoothConnect/app/src/main/res/layout/list_item.xml" value="0.23229166666666667" />
