@@ -36,7 +36,6 @@ public class MonitoringScreen extends AppCompatActivity {
 
     private boolean mIsUserInitiatedDisconnect = false;
 
-    // All controls here
     private TextView mTxtReceive;
     private Button mBtnClearInput;
     private ScrollView scrollView;

@@ -100,12 +100,22 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View arg0) {
-                BluetoothDevice device = ((MyAdapter) (listView.getAdapter())).getSelectedItem();
-                Intent intent = new Intent(getApplicationContext(), MonitoringScreen.class);
-                intent.putExtra(DEVICE_EXTRA, device);
-                intent.putExtra(DEVICE_UUID, mDeviceUUID.toString());
-                intent.putExtra(BUFFER_SIZE, mBufferSize);
-                startActivity(intent);
+                if(!(listView.getAdapter()).isEmpty()) {
+                    System.out.println();
+                    for(int i = 0; i < listView.getAdapter().getCount(); i++){
+                        System.out.println(listView.isItemChecked(i));
+                    }
+                    BluetoothDevice device = ((MyAdapter) (listView.getAdapter())).getSelectedItem();
+                    if(device == null){
+                        Toast.makeText(getApplicationContext(), "Please select your device", Toast.LENGTH_SHORT).show();
+                    }else {
+                        Intent intent = new Intent(getApplicationContext(), MonitoringScreen.class);
+                        intent.putExtra(DEVICE_EXTRA, device);
+                        intent.putExtra(DEVICE_UUID, mDeviceUUID.toString());
+                        intent.putExtra(BUFFER_SIZE, mBufferSize);
+                        startActivity(intent);
+                    }
+                }
             }
         });
 
@@ -219,7 +229,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         public BluetoothDevice getSelectedItem() {
-            return myList.get(selectedIndex);
+            if(selectedIndex!=-1) {
+                return myList.get(selectedIndex);
+            }
+            return null;
         }
 
         @Override
@@ -258,9 +271,7 @@ public class MainActivity extends AppCompatActivity {
             if (convertView == null) {
                 vi = LayoutInflater.from(context).inflate(R.layout.list_item, null);
                 holder = new ViewHolder();
-
                 holder.tv = (TextView) vi.findViewById(R.id.lstContent);
-
                 vi.setTag(holder);
             } else {
                 holder = (ViewHolder) vi.getTag();
