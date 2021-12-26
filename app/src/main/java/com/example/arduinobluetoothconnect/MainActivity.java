@@ -98,7 +98,8 @@ public class MainActivity extends AppCompatActivity {
 
         connect.setOnClickListener(new View.OnClickListener() {
 
-            @Override            public void onClick(View arg0) {
+            @Override
+            public void onClick(View arg0) {
                 BluetoothDevice device = ((MyAdapter) (listView.getAdapter())).getSelectedItem();
                 Intent intent = new Intent(getApplicationContext(), MonitoringScreen.class);
                 intent.putExtra(DEVICE_EXTRA, device);
@@ -131,8 +132,8 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     msg("Bluetooth couldn't be enabled");
                 }
-
                 break;
+
             case SETTINGS: //If the settings have been updated
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
                 String uuid = prefs.getString("prefUuid", "Null");
@@ -151,24 +152,17 @@ public class MainActivity extends AppCompatActivity {
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
                 }
                 break;
+
             default:
                 break;
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    /**
-     * Quick way to call the Toast
-     * @param str
-     */
     private void msg(String str) {
         Toast.makeText(getApplicationContext(), str, Toast.LENGTH_SHORT).show();
     }
 
-    /**
-     * Initialize the List adapter
-     * @param objects
-     */
     private void initList(List<BluetoothDevice> objects) {
         final MyAdapter adapter = new MyAdapter(getApplicationContext(), R.layout.list_item, R.id.lstContent, objects);
         listView.setAdapter(adapter);
@@ -282,7 +276,6 @@ public class MainActivity extends AppCompatActivity {
 
             return vi;
         }
-
     }
 
     @Override
