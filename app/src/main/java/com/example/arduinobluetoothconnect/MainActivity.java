@@ -285,7 +285,6 @@ public class MainActivity extends AppCompatActivity {
             }
             BluetoothDevice device = myList.get(position);
             holder.tv.setText(device.getName() + "\n " + device.getAddress());
-
             return vi;
         }
     }
