@@ -3,4 +3,4 @@ An app that works as a Serial Monitor. This app can connect to Arduino through B
 
 You can download the current version of this app from any of the links below:        
 - https://bit.ly/Serial-Monitor
-- https://www.mediafire.com/folder/cj7yeg649txpw/Arduino_Serial_Monitor_App
+- https://www.mediafire.com/file/nfxvvr8dlrhktpp/app-debug.apk/file
