@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Serial Monitor</string>
-    <string name="downloadLink">
-        <a href="https://drive.google.com/drive/folders/1Z9pjYvobdKyZ7XfRiradbeY7EHCPlhca">Download the Serial Monitor App</a>
+    <string name="githubLink">
+        <a href="https://github.com/aritraMandal02/Arduino-Bluetooth-Connect">Know More</a>
     </string>
 </resources>

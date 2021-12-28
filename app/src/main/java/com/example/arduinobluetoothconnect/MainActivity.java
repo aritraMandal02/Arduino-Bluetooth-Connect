@@ -15,10 +15,12 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -60,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
     public static final String BUFFER_SIZE = "com.example.anysensormonitoring.buffersize";
     private static final String TAG = "BlueTest5-MainActivity";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,8 +70,16 @@ public class MainActivity extends AppCompatActivity {
         connect = (Button) findViewById(R.id.connect);
         Toolbar toolbar = findViewById(R.id.toolbar);
         listView = (ListView) findViewById(R.id.listview);
+        ImageView imageView = findViewById(R.id.imageView3);
 
         setSupportActionBar(toolbar);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gotoUrl("https://github.com/aritraMandal02");
+            }
+        });
 
         if (savedInstanceState != null) {
             ArrayList<BluetoothDevice> list = savedInstanceState.getParcelableArrayList(DEVICE_LIST);
@@ -111,10 +120,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
                 if(!(listView.getAdapter()).isEmpty()) {
-                    System.out.println();
-                    for(int i = 0; i < listView.getAdapter().getCount(); i++){
-                        System.out.println(listView.isItemChecked(i));
-                    }
                     BluetoothDevice device = ((MyAdapter) (listView.getAdapter())).getSelectedItem();
                     if(device == null){
                         Toast.makeText(getApplicationContext(), "Please select your device", Toast.LENGTH_SHORT).show();
@@ -125,11 +130,17 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra(BUFFER_SIZE, mBufferSize);
                         startActivity(intent);
                     }
+                }else{
+                    Toast.makeText(getApplicationContext(), "Search for paired devices and choose one to connect", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
+    private void gotoUrl(String s){
+        Uri uri = Uri.parse(s);
+        startActivity(new Intent(Intent.ACTION_VIEW, uri));
+    }
     protected void onPause() {
         super.onPause();
     }
@@ -308,16 +319,22 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, PreferencesActivity.class);
                 startActivityForResult(intent, SETTINGS);
                 break;
+
             case R.id.about:
                 Dialog dialog = new Dialog(this);
                 dialog.setContentView(R.layout.popup);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//                TextView linkToSite = (TextView) findViewById(R.id.description);
+//                linkToSite.setMovementMethod(LinkMovementMethod.getInstance());
                 dialog.show();
+
                 break;
+
             case R.id.share:
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
-                String shareBody = "Download the Arduino Serial Monitor App:\n https://bit.ly/Serial-Monitor";
+                String shareBody = "Download the Arduino Serial Monitor App:\n https://bit.ly/Serial-Monitor" +
+                        "\n To know more about this app,\n follow the github link:\n https://github.com/aritraMandal02/Arduino-Bluetooth-Connect";
                 String shareSub = "Serial Monitor App";
                 shareIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub);
                 shareIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
