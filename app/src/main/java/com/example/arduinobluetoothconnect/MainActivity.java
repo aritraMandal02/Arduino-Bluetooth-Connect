@@ -26,6 +26,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -59,8 +61,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         search = (Button) findViewById(R.id.search);
         connect = (Button) findViewById(R.id.connect);
-
+        Toolbar toolbar = findViewById(R.id.toolbar);
         listView = (ListView) findViewById(R.id.listview);
+
+        setSupportActionBar(toolbar);
 
         if (savedInstanceState != null) {
             ArrayList<BluetoothDevice> list = savedInstanceState.getParcelableArrayList(DEVICE_LIST);
@@ -288,6 +292,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
@@ -297,6 +302,21 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_settings:
                 Intent intent = new Intent(MainActivity.this, PreferencesActivity.class);
                 startActivityForResult(intent, SETTINGS);
+                break;
+            case R.id.about:
+                Toast.makeText(getApplicationContext(), "Clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.share:
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                String shareBody = "Download the Arduino Serial Monitor App: https://bit.ly/Serial-Monitor";
+                String shareSub = "Serial Monitor App";
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+                startActivity(Intent.createChooser(shareIntent, "Share this App Using:"));
+                break;
+            case R.id.exit:
+                Toast.makeText(getApplicationContext(), "Exiting Serial Monitor", Toast.LENGTH_SHORT).show();
                 break;
         }
         return super.onOptionsItemSelected(item);

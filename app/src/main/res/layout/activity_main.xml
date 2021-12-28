@@ -93,12 +93,15 @@
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#F84884"
+        android:background="#EC457E"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
+        app:title="@string/app_name"
+        app:logo="@drawable/ic_baseline_bluetooth_connected_24"
+        app:titleTextColor="@color/white"
+        app:titleMarginStart="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
