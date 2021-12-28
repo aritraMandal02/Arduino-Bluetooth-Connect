@@ -1,19 +1,24 @@
 package com.example.arduinobluetoothconnect;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,6 +28,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -303,19 +309,39 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, SETTINGS);
                 break;
             case R.id.about:
-                Toast.makeText(getApplicationContext(), "Clicked", Toast.LENGTH_SHORT).show();
+                Dialog dialog = new Dialog(this);
+                dialog.setContentView(R.layout.popup);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
                 break;
             case R.id.share:
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
-                String shareBody = "Download the Arduino Serial Monitor App: https://bit.ly/Serial-Monitor";
+                String shareBody = "Download the Arduino Serial Monitor App:\n https://bit.ly/Serial-Monitor";
                 String shareSub = "Serial Monitor App";
                 shareIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub);
                 shareIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
                 startActivity(Intent.createChooser(shareIntent, "Share this App Using:"));
                 break;
+
             case R.id.exit:
-                Toast.makeText(getApplicationContext(), "Exiting Serial Monitor", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setMessage("Do you really want to exit the app?");
+                builder.setCancelable(true);
+                builder.setNegativeButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        finish();
+                    }
+                });
+                builder.setPositiveButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        dialogInterface.cancel();
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
                 break;
         }
         return super.onOptionsItemSelected(item);
