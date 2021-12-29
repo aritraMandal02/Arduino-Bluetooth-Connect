@@ -6,12 +6,21 @@
     android:background="@drawable/popup_background">
 
     <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/about"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/git_icon" />
+
+    <ImageView
         android:id="@+id/image"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/profile"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp" />
+        android:layout_marginTop="15dp"
+        android:src="@drawable/profile" />
 
     <TextView
         android:id="@+id/name"
@@ -19,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/image"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="10dp"
         android:text="Hi"
         android:textSize="24sp" />
 
@@ -29,12 +38,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/name"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="5dp"
         android:gravity="center"
         android:text="I am Aritra"
         android:textSize="20sp" />
 
     <TextView
+        android:id="@+id/about"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/description"

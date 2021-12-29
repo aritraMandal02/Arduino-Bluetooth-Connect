@@ -70,16 +70,8 @@ public class MainActivity extends AppCompatActivity {
         connect = (Button) findViewById(R.id.connect);
         Toolbar toolbar = findViewById(R.id.toolbar);
         listView = (ListView) findViewById(R.id.listview);
-        ImageView imageView = findViewById(R.id.imageView3);
 
         setSupportActionBar(toolbar);
-
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                gotoUrl("https://github.com/aritraMandal02");
-            }
-        });
 
         if (savedInstanceState != null) {
             ArrayList<BluetoothDevice> list = savedInstanceState.getParcelableArrayList(DEVICE_LIST);
@@ -324,8 +316,13 @@ public class MainActivity extends AppCompatActivity {
                 Dialog dialog = new Dialog(this);
                 dialog.setContentView(R.layout.popup);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//                TextView linkToSite = (TextView) findViewById(R.id.description);
-//                linkToSite.setMovementMethod(LinkMovementMethod.getInstance());
+                ImageView imageView = dialog.findViewById(R.id.imageView3);
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        gotoUrl("https://github.com/aritraMandal02");
+                    }
+                });
                 dialog.show();
 
                 break;
@@ -333,8 +330,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.share:
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
-                String shareBody = "Download the Arduino Serial Monitor App:\n https://bit.ly/Serial-Monitor" +
-                        "\n To know more about this app,\n follow the github link:\n https://github.com/aritraMandal02/Arduino-Bluetooth-Connect";
+                String shareBody = "Download the Arduino Serial Monitor App:\n" + "https://bit.ly/Serial-Monitor" +
+                        "\n\nTo know more about this app,\nfollow the github link:\n" + "https://github.com/aritraMandal02/Arduino-Bluetooth-Connect";
                 String shareSub = "Serial Monitor App";
                 shareIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub);
                 shareIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
