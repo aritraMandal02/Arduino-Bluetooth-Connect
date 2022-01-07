@@ -50,6 +50,8 @@ public class MonitoringScreen extends AppCompatActivity {
     private BluetoothDevice mDevice;
 
     private ProgressDialog progressDialog;
+    int loopDelay = 50;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -170,9 +172,8 @@ public class MonitoringScreen extends AppCompatActivity {
                                 }
                             });
                         }
-
                     }
-                    Thread.sleep(50);
+                    Thread.sleep(loopDelay);
                 }
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
