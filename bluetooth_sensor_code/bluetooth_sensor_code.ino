@@ -29,8 +29,6 @@ void setup() {
   Serial.begin(9600);
   Serial.println("Arduino Bluetooth App");
   delay(2500);
-  
-
 }
 
 void loop() {
