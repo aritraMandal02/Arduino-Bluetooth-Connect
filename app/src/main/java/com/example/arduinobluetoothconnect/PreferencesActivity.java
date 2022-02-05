@@ -52,8 +52,6 @@ public class PreferencesActivity extends PreferenceActivity implements OnSharedP
                 pref.setSummary(entry.getValue().toString());
             }
         }
-
         super.onResume();
     }
-
 }
